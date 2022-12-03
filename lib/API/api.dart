@@ -6,7 +6,7 @@ class BaseAPI {
 
   var login = "$authPath/login.php";
   var register = "$authPath/register.php";
-
+  var getProfile = "$authPath/get-profile.php";
   // more routes
   Map<String, String> headers = {
     "Content-Type": "application/json; charset=UTF-8"
