@@ -29,7 +29,7 @@ class _pemesananState extends State<pemesanan> {
                 child: Center(
                     child: Column(mainAxisSize: MainAxisSize.min, children: [
           const SizedBox(
-            height: 50,
+            height: 30,
           ),
           Text("TransGo",
               style:
@@ -170,7 +170,7 @@ class _pemesananState extends State<pemesanan> {
                             ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 8,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
@@ -194,7 +194,7 @@ class _pemesananState extends State<pemesanan> {
                             ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 8,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
@@ -218,7 +218,7 @@ class _pemesananState extends State<pemesanan> {
                             ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 8,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
@@ -237,18 +237,33 @@ class _pemesananState extends State<pemesanan> {
                           color: Colors.black,
                           fontWeight: FontWeight.bold
                         ) ,
-                      
                       ),
                             ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  
                 ],
               ),
             ),
-          )
+          ),
+          SizedBox(
+                    height: 30,
+                  ),
+          SizedBox(
+                    width: MediaQuery.of(context).size.width - 30,
+                    height: 50,
+                    child: TextButton(
+                        onPressed: () {
+                          onSubmit(context);
+                        },
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                          alignment: Alignment.center,
+                          backgroundColor: const Color(0xFF8E97FD),
+                        ),
+                        child: const Text(
+                          "Pesan",
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ))),
         ])))));
   }
 }

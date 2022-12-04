@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:transgo/UI/Home.dart';
 import 'package:transgo/UI/Pemesanan.dart';
 import 'package:transgo/UI/Resetpassword.dart';
+import 'package:transgo/UI/home2.dart';
 import 'package:transgo/UI/splashscreen.dart';
 import 'package:transgo/UI/register.dart';
 import 'package:transgo/UI/login.dart';
@@ -35,7 +36,7 @@ class _MyAppState extends State<MyApp> {
         title: 'TransGo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: const Color.fromARGB(255, 96, 110, 255),
+          primaryColor: const Color.fromARGB(255, 96, 100, 255),
           fontFamily: GoogleFonts.inter().fontFamily,
         ),
         routes: {
@@ -44,7 +45,8 @@ class _MyAppState extends State<MyApp> {
           '/login': (context) => const Login(),
           '/register': (context) => const Register(),
           '/lupapassword': (context) => const Lupapasword(),
-          '/pemesanan': (context) => const pemesanan()
+          '/pemesanan': (context) => const pemesanan(),
+          '/home2': (context) => const home2()
         });
     return ChangeNotifierProvider<AuthApplication>(
       create: (context) => AuthApplication(),
