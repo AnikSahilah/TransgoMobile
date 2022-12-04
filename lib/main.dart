@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
               TargetPlatform.android: CupertinoPageTransitionsBuilder(),
             })),
         routes: {
-          '/': (context) => const LandingScreen(),
+          '/': (context) => Home(),
           '/home': (context) => Home(),
           '/login': (context) => const Login(),
           '/register': (context) => const Register(),
