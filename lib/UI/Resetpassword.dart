@@ -1,197 +1,139 @@
-///File download from FlutterViz- Drag and drop a tools. For more details visit https://flutterviz.io/
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
+import 'package:transgo/UI/register.dart';
+import 'package:transgo/style/style.dart';
 
+class Lupapasword extends StatefulWidget {
+  const Lupapasword({super.key});
 
-class Resetpassword extends StatelessWidget {
+  @override
+  State<Lupapasword> createState() => _LupapaswordState();
+}
 
-@override
-Widget build(BuildContext context) {
-return Scaffold(
-backgroundColor: Color(0xffffffff),
-body:
-Stack(
-alignment:Alignment.topLeft,
-children: [
-///***If you have exported images you must have to copy those images in assets/images directory.
-Image(
-image:AssetImage("assets/images/Frame 2 (1).png"),
-height:MediaQuery.of(context).size.height,
-width:MediaQuery.of(context).size.width,
-fit:BoxFit.cover,
-),
-Padding(
-padding:EdgeInsets.symmetric(vertical: 0,horizontal:30),
-child:Align(
-alignment:Alignment(0.0, -0.9),
-child:///***If you have exported images you must have to copy those images in assets/images directory.
-Image(
-image:AssetImage("assets/images/Reset Password 1.png"),
-height:130,
-width:225,
-fit:BoxFit.cover,
-),
-),
-),
-Align(
-alignment:Alignment(-0.3, -0.3),
-child:Text(
-"Reset Password",
-textAlign: TextAlign.start,
-overflow:TextOverflow.clip,
-style:TextStyle(
-fontWeight:FontWeight.w800,
-fontStyle:FontStyle.normal,
-fontSize:24,
-color:Color(0xff000000),
-),
-),
-),
-Padding(
-padding:EdgeInsets.symmetric(vertical: 0,horizontal:30),
-child:Align(
-alignment:Alignment(0.0, 0.4),
-child:TextField(
-controller:TextEditingController(),
-obscureText:true,
-textAlign:TextAlign.start,
-maxLines:1,
-style:TextStyle(
-fontWeight:FontWeight.w400,
-fontStyle:FontStyle.normal,
-fontSize:14,
-color:Color(0xff000000),
-),
-decoration:InputDecoration(
-disabledBorder:UnderlineInputBorder(
-borderRadius:BorderRadius.circular(5.0),
-borderSide:BorderSide(
-color:Color(0xff000000),
-width:2
-),
-),
-focusedBorder:UnderlineInputBorder(
-borderRadius:BorderRadius.circular(5.0),
-borderSide:BorderSide(
-color:Color(0xff000000),
-width:2
-),
-),
-enabledBorder:UnderlineInputBorder(
-borderRadius:BorderRadius.circular(5.0),
-borderSide:BorderSide(
-color:Color(0xff000000),
-width:2
-),
-),
-labelText:"New Password",
-labelStyle:TextStyle(
-fontWeight:FontWeight.w400,
-fontStyle:FontStyle.normal,
-fontSize:14,
-color:Color(0xff000000),
-),
-hintText:"Masukkan new password",
-hintStyle:TextStyle(
-fontWeight:FontWeight.w400,
-fontStyle:FontStyle.normal,
-fontSize:14,
-color:Color(0xff000000),
-),
-filled:true,
-fillColor:Color(0xfff2f2f3),
-isDense:true,
-contentPadding:EdgeInsets.symmetric(vertical: 8,horizontal:12),
-prefixIcon:Icon(Icons.lock_open,color:Color(0xff212435),size:24),
-suffixIcon:Icon(Icons.visibility_off,color:Color(0xff212435),size:24),
-),
-),
-),
-),
-Padding(
-padding:EdgeInsets.symmetric(vertical: 0,horizontal:30),
-child:Align(
-alignment:Alignment(0.0, 0.2),
-child:TextField(
-controller:TextEditingController(),
-obscureText:false,
-textAlign:TextAlign.start,
-maxLines:1,
-style:TextStyle(
-fontWeight:FontWeight.w400,
-fontStyle:FontStyle.normal,
-fontSize:14,
-color:Color(0xff000000),
-),
-decoration:InputDecoration(
-disabledBorder:UnderlineInputBorder(
-borderRadius:BorderRadius.circular(5.0),
-borderSide:BorderSide(
-color:Color(0xff000000),
-width:2
-),
-),
-focusedBorder:UnderlineInputBorder(
-borderRadius:BorderRadius.circular(5.0),
-borderSide:BorderSide(
-color:Color(0xff000000),
-width:2
-),
-),
-enabledBorder:UnderlineInputBorder(
-borderRadius:BorderRadius.circular(5.0),
-borderSide:BorderSide(
-color:Color(0xff000000),
-width:2
-),
-),
-labelText:"Username",
-labelStyle:TextStyle(
-fontWeight:FontWeight.w400,
-fontStyle:FontStyle.normal,
-fontSize:14,
-color:Color(0xff000000),
-),
-hintText:"Masukkan username",
-hintStyle:TextStyle(
-fontWeight:FontWeight.w400,
-fontStyle:FontStyle.normal,
-fontSize:14,
-color:Color(0xff000000),
-),
-filled:true,
-fillColor:Color(0xfff2f2f3),
-isDense:true,
-contentPadding:EdgeInsets.symmetric(vertical: 8,horizontal:12),
-prefixIcon:Icon(Icons.person,color:Color(0xff212435),size:24),
-),
-),
-),
-),
-Padding(
-padding:EdgeInsets.symmetric(vertical: 0,horizontal:30),
-child:Align(
-alignment:Alignment(0.0, 0.9),
-child:MaterialButton(
-onPressed:(){},
-color:Color(0xdd1d1397),
-elevation:0,
-shape:RoundedRectangleBorder(
-borderRadius:BorderRadius.zero,
-side:BorderSide(color:Color(0xff808080),width:1),
-),
-padding:EdgeInsets.all(16),
-child:Text("Konfirmasi", style: TextStyle( fontSize:18,
-fontWeight:FontWeight.w800,
-fontStyle:FontStyle.normal,
-),),
-textColor:Color(0xffffffff),
-height:40,
-minWidth:140,
-),
-),
-),
-],),
-)
-;}
+class _LupapaswordState extends State<Lupapasword> {
+  final _email = TextEditingController();
+  final _password = TextEditingController();
+  final _konfirmpassword = TextEditingController();
+
+  Future onSubmit(context) async {}
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: const Color(0xffffffff),
+      body: SingleChildScrollView(
+        child: SafeArea(
+            child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: 50,
+              ),
+              Text("Lupa Password",
+              style: GoogleFonts.inter(
+                fontSize: 26, fontWeight: FontWeight.bold
+              )),
+              const SizedBox(
+                height: 2,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Image(
+                image: AssetImage("assets/image/lupa_password.png"),
+                height: 180,
+                width: 300,
+                fit: BoxFit.contain,
+              ),
+              Container(
+                decoration: const BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: Colors.black, width: .5)
+                  )
+                ),
+                width: MediaQuery.of(context).size.width - 80,
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 50, right: 50),
+                child: TextFormField(
+                  controller: _email,
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 96, 110, 255),
+                    fontWeight: FontWeight.w600
+                  ),
+                  decoration: CustomInputStyle.inputDecoration(
+                    "Email", "Inputkan email anda..", Icons.email)
+                  )
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left:  50, right: 50),
+                  child: TextFormField(
+                    controller: _password,
+                    style: const TextStyle(
+                      color: Color.fromARGB(255, 96, 110, 255),
+                      fontWeight: FontWeight.w600
+                    ),
+                    decoration: CustomInputStyle.inputDecoration(
+                      "Password", "Inputkan password anda..", Icons.lock),
+                      obscureText: true,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                                  Padding(
+                  padding: const EdgeInsets.only(left:  50, right: 50),
+                  child: TextFormField(
+                    controller: _konfirmpassword,
+                    style: const TextStyle(
+                      color: Color.fromARGB(255, 96, 110, 255),
+                      fontWeight: FontWeight.w600
+                    ),
+                    decoration: CustomInputStyle.inputDecoration(
+                      "Konfirmasi Password", "Inputkan ulang password anda..", Icons.lock),
+                      obscureText: true,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 70,
+                  ),
+                  SizedBox(
+                    width:  MediaQuery.of(context).size.width - 100,
+                    height: 50,
+                    child: TextButton(
+                      onPressed: () {
+                        onSubmit(context);
+                      },
+                      style: TextButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)
+                        ),
+                        alignment: Alignment.center,
+                        backgroundColor: const Color(0xFF8E97FD),
+                      ),
+                      child: const Text(
+                        "Konfirmasi",
+                        style: TextStyle(color: Colors.white),
+                      )
+                    )
+                  ),
+            ],
+                )
+              )
+              ),
+            
+          )
+          );
+  }
 }

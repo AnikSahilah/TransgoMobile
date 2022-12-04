@@ -20,7 +20,7 @@ class _LoginState extends State<Login> {
 
   Future onSubmit(context) async {
     final response = await http.post(
-        Uri.parse("http://10.0.2.2/api/v3/auth/login.php"),
+        Uri.parse("http://10.0.2.2/v3/auth/login.php"),
         body: {"email": _email.text, "sandi": _password.text});
 
     final output = jsonDecode(response.body);
@@ -113,7 +113,9 @@ class _LoginState extends State<Login> {
                           style: TextStyle(color: Colors.white),
                         ))),
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, "/lupapassword");
+                    },
                     child: Text(
                       "Lupa Password?",
                     )),

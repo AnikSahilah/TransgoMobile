@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:transgo/UI/Home.dart';
+import 'package:transgo/UI/Pemesanan.dart';
 import 'package:transgo/UI/Resetpassword.dart';
 import 'package:transgo/UI/splashscreen.dart';
 import 'package:transgo/UI/register.dart';
@@ -41,7 +42,9 @@ class _MyAppState extends State<MyApp> {
           '/': (context) => const LandingScreen(),
           '/home': (context) => Home(),
           '/login': (context) => const Login(),
-          '/register': (context) => const Register()
+          '/register': (context) => const Register(),
+          '/lupapassword': (context) => const Lupapasword(),
+          '/pemesanan': (context) => const pemesanan()
         });
     return ChangeNotifierProvider<AuthApplication>(
       create: (context) => AuthApplication(),
