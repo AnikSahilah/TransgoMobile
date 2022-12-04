@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
           fontFamily: GoogleFonts.inter().fontFamily,
         ),
         routes: {
-          '/': (context) => const LandingScreen(),
+          '/': (context) => Home(),
           '/home': (context) => Home(),
           '/login': (context) => const Login(),
           '/register': (context) => const Register(),
