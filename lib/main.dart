@@ -36,11 +36,13 @@ class _MyAppState extends State<MyApp> {
         title: 'TransGo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: const Color.fromARGB(255, 96, 100, 255),
-          fontFamily: GoogleFonts.inter().fontFamily,
-        ),
+            primaryColor: const Color.fromARGB(255, 96, 110, 255),
+            fontFamily: GoogleFonts.inter().fontFamily,
+            pageTransitionsTheme: const PageTransitionsTheme(builders: {
+              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+            })),
         routes: {
-          '/': (context) => const LandingScreen(),
+          '/': (context) => Home(),
           '/home': (context) => Home(),
           '/login': (context) => const Login(),
           '/register': (context) => const Register(),

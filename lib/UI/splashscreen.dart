@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:transgo/provider/auth.dart';
 
 class LandingScreen extends StatefulWidget {
@@ -30,30 +31,19 @@ class _LandingScreenState extends State<LandingScreen> {
           child: Column(
             children: [
               const SizedBox(
-                height: 20,
+                height: 30,
               ),
-              const Text(
-                "TransGo",
-                style: TextStyle(
+              const SizedBox(
+                height: 10,
+              ),
+              Lottie.network(
+                  "https://assets3.lottiefiles.com/packages/lf20_adagzoy4.json"),
+              Text(
+                "T r a n s G o",
+                style: GoogleFonts.inter(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                 ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              const Image(
-                image: AssetImage("assets/image/buslanding.png"),
-                height: 200,
-                width: 300,
-                fit: BoxFit.contain,
-              ),
-              const SizedBox(
-                height: 80,
-              ),
-              const Text(
-                "Selamat Datang",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 30,
