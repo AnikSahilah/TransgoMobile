@@ -1,5 +1,7 @@
 ///File download from FlutterViz- Drag and drop a tools. For more details visit https://flutterviz.io/
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -18,6 +20,7 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   void initState() {
     super.initState();
+
     print("init state from splashscreen");
   }
 
@@ -31,10 +34,7 @@ class _LandingScreenState extends State<LandingScreen> {
           child: Column(
             children: [
               const SizedBox(
-                height: 30,
-              ),
-              const SizedBox(
-                height: 10,
+                height: 40,
               ),
               Lottie.network(
                   "https://assets3.lottiefiles.com/packages/lf20_adagzoy4.json"),
@@ -71,24 +71,24 @@ class _LandingScreenState extends State<LandingScreen> {
                     alignment: Alignment.center,
                     backgroundColor: const Color(0xFF8E97FD),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Register",
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Sudah memiliki akun? "),
+                  const Text("Sudah memiliki akun? "),
                   TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, "/login");
                       },
-                      child: Text("Login"))
+                      child: const Text("Login"))
                 ],
               )
             ],

@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthApplication with ChangeNotifier {
-  bool _isLogin = true;
+  bool _isLogin = false;
   Map<String, dynamic> _user = {};
 
 // getter untuk mengakses state
@@ -9,13 +10,23 @@ class AuthApplication with ChangeNotifier {
   Map get user => _user;
 
 // setter / method untuk mengubah state
-  set loggedIn(bool value) {
+  void loggedIn(bool value) {
     _isLogin = value;
     notifyListeners();
   }
 
-  set addUser(Map<String, dynamic> value) {
+  void setUser(Map<String, dynamic> value) {
+    print({"set User", value});
     _user = value;
-    notifyListeners();
+
+    print(_user);
+  }
+
+  Future logOut() async {
+    _isLogin = false;
+    _user = {};
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    return await prefs.remove("id");
   }
 }

@@ -1,8 +1,12 @@
+import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:transgo/API/api.dart';
 
 import 'package:transgo/UI/Home.dart';
 import 'package:transgo/UI/Pemesanan.dart';
@@ -13,6 +17,7 @@ import 'package:transgo/UI/register.dart';
 import 'package:transgo/UI/login.dart';
 import 'package:transgo/UI/profil.dart';
 import 'package:transgo/provider/auth.dart';
+import 'package:http/http.dart' as http;
 
 //  TODO TONIGHT
 // 1. save id user to sharedpreferences
@@ -20,7 +25,13 @@ import 'package:transgo/provider/auth.dart';
 // 3. layouting home
 // 4. show alert ketika error / success
 
-void main() => runApp(const MyApp());
+void main() => runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AuthApplication>(
+            create: (context) => AuthApplication())
+      ],
+      child: const MyApp(),
+    ));
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -30,8 +41,46 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final authState = AuthApplication();
+  bool _isLogin = false;
+  Map<String, dynamic> _user = {};
+
+  checkIsLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var id = prefs.getInt("id");
+    print(id);
+
+    if (id == null) {
+      return false;
+    }
+
+    final response = await http
+        .post(Uri.parse(BaseAPI().getProfile), body: {"id": id.toString()});
+
+    print(response.body);
+    var output = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      setState(() {
+        _isLogin = true;
+        _user = output["data"];
+      });
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    checkIsLogin();
+  }
+
   @override
   Widget build(BuildContext context) {
+    Provider.of<AuthApplication>(context).setUser(_user);
+
     var materialApp = MaterialApp(
         title: 'TransGo',
         debugShowCheckedModeBanner: false,
@@ -41,18 +90,22 @@ class _MyAppState extends State<MyApp> {
             pageTransitionsTheme: const PageTransitionsTheme(builders: {
               TargetPlatform.android: CupertinoPageTransitionsBuilder(),
             })),
+        home: Builder(
+          builder: (context) {
+            if (_isLogin) {
+              return const Home();
+            }
+            return const LandingScreen();
+          },
+        ),
         routes: {
-          '/': (context) => Home(),
-          '/home': (context) => Home(),
           '/login': (context) => const Login(),
           '/register': (context) => const Register(),
           '/lupapassword': (context) => const Lupapasword(),
           '/pemesanan': (context) => const pemesanan(),
           '/home2': (context) => const home2()
         });
-    return ChangeNotifierProvider<AuthApplication>(
-      create: (context) => AuthApplication(),
-      child: materialApp,
-    );
+
+    return materialApp;
   }
 }

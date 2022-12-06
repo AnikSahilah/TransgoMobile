@@ -5,6 +5,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:transgo/UI/Home.dart';
+import 'package:transgo/provider/auth.dart';
 import 'package:transgo/style/style.dart';
 
 class Login extends StatefulWidget {
@@ -14,21 +18,49 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
+error(String val) => Container(
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 240, 44, 30),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      child: Text(
+        val,
+        textAlign: TextAlign.center,
+        style: GoogleFonts.inter(color: Colors.white),
+      ),
+    );
+
 class _LoginState extends State<Login> {
   final _email = TextEditingController();
   final _password = TextEditingController();
 
   Future onSubmit(context) async {
     final response = await http.post(
-        Uri.parse("http://10.0.2.2/v3/auth/login.php"),
+        Uri.parse("http://10.0.2.2/api/v3/auth/login.php"),
         body: {"email": _email.text, "sandi": _password.text});
 
     final output = jsonDecode(response.body);
+    SharedPreferences pref = await SharedPreferences.getInstance();
 
     if (response.statusCode == 200) {
-      print(output);
-      Navigator.pushReplacementNamed(context, "/home");
+      pref.setInt("id", output["data"]["id"]);
+      var authState = Provider.of<AuthApplication>(context, listen: false);
+
+      authState.setUser(output["data"]);
+
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute<void>(
+              builder: (BuildContext context) => const Home()),
+          ModalRoute.withName("/"));
     } else {
+      var snakbar = SnackBar(
+        content: error(output["message"]),
+        backgroundColor: Colors.transparent,
+        behavior: SnackBarBehavior.floating,
+        elevation: 0,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snakbar);
       print(output['message']);
       return false;
     }
@@ -45,7 +77,7 @@ class _LoginState extends State<Login> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
                 Text("Selamat Datang",
@@ -116,18 +148,18 @@ class _LoginState extends State<Login> {
                     onPressed: () {
                       Navigator.pushReplacementNamed(context, "/lupapassword");
                     },
-                    child: Text(
+                    child: const Text(
                       "Lupa Password?",
                     )),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Belum punya akun? "),
+                    const Text("Belum punya akun? "),
                     TextButton(
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, "/register");
                         },
-                        child: Text("Register"))
+                        child: const Text("Register"))
                   ],
                 )
               ],
