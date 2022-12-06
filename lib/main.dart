@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:transgo/API/api.dart';
 
-import 'package:transgo/UI/Home.dart';
+import 'package:transgo/UI/home.dart';
 import 'package:transgo/UI/Pemesanan.dart';
 import 'package:transgo/UI/Resetpassword.dart';
 import 'package:transgo/UI/home2.dart';
@@ -24,6 +24,10 @@ import 'package:http/http.dart' as http;
 // 2. finishing api dari smeua table
 // 3. layouting home
 // 4. show alert ketika error / success
+
+// TODO
+// 1. Notif register
+// 2. Layouting yang belum
 
 void main() => runApp(MultiProvider(
       providers: [
@@ -85,11 +89,12 @@ class _MyAppState extends State<MyApp> {
         title: 'TransGo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            primaryColor: const Color.fromARGB(255, 96, 110, 255),
-            fontFamily: GoogleFonts.inter().fontFamily,
-            pageTransitionsTheme: const PageTransitionsTheme(builders: {
-              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-            })),
+          primaryColor: const Color.fromARGB(255, 96, 110, 255),
+          fontFamily: GoogleFonts.inter().fontFamily,
+          // pageTransitionsTheme: const PageTransitionsTheme(builders: {
+          //   TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+          // })
+        ),
         home: Builder(
           builder: (context) {
             if (_isLogin) {
@@ -103,7 +108,8 @@ class _MyAppState extends State<MyApp> {
           '/register': (context) => const Register(),
           '/lupapassword': (context) => const Lupapasword(),
           '/pemesanan': (context) => const pemesanan(),
-          '/home2': (context) => const home2()
+          '/home2': (context) => const Home2(),
+          '/profile': (context) => Profil()
         });
 
     return materialApp;

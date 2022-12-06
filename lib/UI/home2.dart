@@ -4,14 +4,14 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/single_child_widget.dart';
 
-class home2 extends StatefulWidget {
-  const home2({super.key});
+class Home2 extends StatefulWidget {
+  const Home2({super.key});
 
   @override
-  State<home2> createState() => _home2State();
+  State<Home2> createState() => _Home2State();
 }
 
-class _home2State extends State<home2> {
+class _Home2State extends State<Home2> {
   Future onSubmit(context) async {}
 
   @override
@@ -64,20 +64,18 @@ class _home2State extends State<home2> {
                 decoration: BoxDecoration(
                     color: const Color(0xFF8E97FD),
                     borderRadius: BorderRadius.circular(14),
-                    
                     border:
                         Border.all(color: const Color(0xFF8E97FD), width: 1)),
                 width: MediaQuery.of(context).size.width - 15,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 10,bottom: 10),
+                  padding: EdgeInsets.only(top: 10, bottom: 10),
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemCount: 8,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.all(
-                            8),
+                        padding: const EdgeInsets.all(8),
                         child: Container(
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(250, 250, 250, 250),
@@ -135,9 +133,7 @@ class _home2State extends State<home2> {
                 width: MediaQuery.of(context).size.width - 30,
                 height: 50,
                 child: TextButton(
-                    onPressed: () {
-                    
-                    },
+                    onPressed: () {},
                     style: TextButton.styleFrom(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),

@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:transgo/UI/Home.dart';
+import 'package:transgo/UI/home.dart';
 import 'package:transgo/provider/auth.dart';
 import 'package:transgo/style/style.dart';
 
