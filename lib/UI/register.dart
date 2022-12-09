@@ -15,6 +15,17 @@ class Register extends StatefulWidget {
   State<Register> createState() => _RegisterState();
 }
 
+toast(String val, Color color) => Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          color: color, borderRadius: BorderRadius.all(Radius.circular(10))),
+      child: Text(
+        val,
+        textAlign: TextAlign.center,
+        style: GoogleFonts.inter(color: Colors.white),
+      ),
+    );
+
 class _RegisterState extends State<Register> {
   final Map<String, dynamic> _data = {
     'nama': "",
@@ -53,8 +64,23 @@ class _RegisterState extends State<Register> {
     var output = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
+      var snakbar = SnackBar(
+        content: toast(output["message"], Colors.green),
+        backgroundColor: Colors.transparent,
+        behavior: SnackBarBehavior.floating,
+        elevation: 0,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snakbar);
       print(output);
     } else {
+      var snakbar = SnackBar(
+        content: toast(output["message"], Color.fromARGB(255, 239, 30, 16)),
+        backgroundColor: Colors.transparent,
+        behavior: SnackBarBehavior.floating,
+        elevation: 0,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snakbar);
+      print(output['message']);
       print(output);
     }
   }

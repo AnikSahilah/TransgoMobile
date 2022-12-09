@@ -70,6 +70,7 @@ class _MyAppState extends State<MyApp> {
       });
       return true;
     } else {
+      prefs.remove("id");
       return false;
     }
   }
