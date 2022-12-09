@@ -36,14 +36,14 @@ class _LoginState extends State<Login> {
 
   Future onSubmit(context) async {
     final response = await http.post(
-        Uri.parse("http://10.0.2.2/api/v3/auth/login.php"),
+        Uri.parse("http://10.0.2.2/v3/auth/login.php"),
         body: {"email": _email.text, "sandi": _password.text});
 
     final output = jsonDecode(response.body);
     SharedPreferences pref = await SharedPreferences.getInstance();
-
+print(int.parse(output["data"]["id"]).runtimeType);
     if (response.statusCode == 200) {
-      pref.setInt("id", output["data"]["id"]);
+      pref.setInt("id", int.parse(output["data"]["id"]));
       var authState = Provider.of<AuthApplication>(context, listen: false);
 
       authState.setUser(output["data"]);
@@ -138,7 +138,7 @@ class _LoginState extends State<Login> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15)),
                           alignment: Alignment.center,
-                          backgroundColor: const Color(0xFF8E97FD),
+                          backgroundColor: const Color(0xFF3875BC),
                         ),
                         child: const Text(
                           "Login",
