@@ -1,7 +1,6 @@
 class BaseAPI {
   static String base = "http://10.0.2.2";
-  static var api = "$base/api/v3";
-  var customersPath = "$api/customers";
+  static var api = "$base/v3";
   static var authPath = "$api/auth";
 
   var login = "$authPath/login.php";

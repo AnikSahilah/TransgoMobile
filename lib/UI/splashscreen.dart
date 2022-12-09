@@ -63,13 +63,13 @@ class _LandingScreenState extends State<LandingScreen> {
                 height: 50,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, "/register");
+                    Navigator.pushNamed(context, "/home2");
                   },
                   style: TextButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     alignment: Alignment.center,
-                    backgroundColor: const Color(0xFF8E97FD),
+                    backgroundColor: const Color(0xFF3875BC),
                   ),
                   child: const Text(
                     "Register",

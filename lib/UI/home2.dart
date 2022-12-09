@@ -23,19 +23,15 @@ class _Home2State extends State<Home2> {
             child: Column(
           children: [
             Container(
-                decoration: BoxDecoration(
-                    color: const Color(0xFF8E97FD),
-                    border:
-                        Border.all(color: const Color(0xFF8E97FD), width: 1)),
-                height: 50,
-                width: MediaQuery.of(context).size.width - 0,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(
+                        width: 50,
+                      ),
                       Text(
                         "TransGo",
                         style: GoogleFonts.inter(
@@ -49,7 +45,7 @@ class _Home2State extends State<Home2> {
                   ),
                 )),
             SizedBox(
-              height: 10,
+              height: 40,
             ),
             Text(
               "Hallo, Nama",
@@ -57,16 +53,10 @@ class _Home2State extends State<Home2> {
                   GoogleFonts.inter(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(
-              height: 10,
+              height: 50,
             ),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
-                    color: const Color(0xFF8E97FD),
-                    borderRadius: BorderRadius.circular(14),
-                    border:
-                        Border.all(color: const Color(0xFF8E97FD), width: 1)),
-                width: MediaQuery.of(context).size.width - 15,
                 child: Padding(
                   padding: EdgeInsets.only(top: 10, bottom: 10),
                   child: ListView.builder(
@@ -138,7 +128,7 @@ class _Home2State extends State<Home2> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
                       alignment: Alignment.center,
-                      backgroundColor: const Color(0xFF8E97FD),
+                      backgroundColor: const Color(0xFF3875BC),
                     ),
                     child: const Text(
                       "Konfirmasi",

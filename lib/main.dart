@@ -7,9 +7,10 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:transgo/API/api.dart';
+import 'package:transgo/UI/Pemesanan.dart';
 
 import 'package:transgo/UI/home.dart';
-import 'package:transgo/UI/Pemesanan.dart';
+import 'package:transgo/UI/detail_pemesanan.dart';
 import 'package:transgo/UI/Resetpassword.dart';
 import 'package:transgo/UI/home2.dart';
 import 'package:transgo/UI/splashscreen.dart';
@@ -107,9 +108,10 @@ class _MyAppState extends State<MyApp> {
           '/login': (context) => const Login(),
           '/register': (context) => const Register(),
           '/lupapassword': (context) => const Lupapasword(),
-          '/pemesanan': (context) => const pemesanan(),
+          '/detail_pemesanan': (context) => const detail_pemesanan(),
           '/home2': (context) => const Home2(),
-          '/profile': (context) => Profil()
+          '/profile': (context) => Profil(),
+          '/pemesanan': (context) => pemesanan()
         });
 
     return materialApp;
