@@ -27,37 +27,41 @@ toast(String val, Color color) => Container(
     );
 
 class _RegisterState extends State<Register> {
-  final Map<String, dynamic> _data = {
-    'nama': "",
-    'nik': "",
-    "email": '',
-    'sandi': '',
-    'alamat': '',
-    'no_hp': '',
-    'gender': '',
-    'level': ''
-  };
-
-  final List<Map<String, String>> _levelList = [
-    {"label": 'Pilih jenis akun', "value": ''},
-    {"label": 'Penumpang', "value": '1'},
-    {"label": 'Kernet', "value": '2'}
-  ];
+  final _nama = TextEditingController();
+  final _nik = TextEditingController();
+  final _email = TextEditingController();
+  final _password = TextEditingController();
+  final _alamat = TextEditingController();
+  final _nohp = TextEditingController();
+  var _gender = "";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  onChange(String name, value) {
-    _data[name] = value;
-  }
-
   generalValidator(value) {
     if (value == null || value.isEmpty) {
-      return 'Wajib diisi!';
+      return 'Field tidak boleh kosong!';
     }
     return null;
   }
 
   onSubmit() async {
+    var validate = _formKey.currentState!.validate();
+
+    if (!validate) {
+      return;
+    }
+
+    var _data = {
+      'nama': _nama.text,
+      'nik': _nik.text,
+      "email": _email.text,
+      'sandi': _password.text,
+      'alamat': _alamat.text,
+      'no_hp': _nohp.text,
+      'gender': _gender,
+      'level': '4'
+    };
+
     final response =
         await http.post(Uri.parse(BaseAPI().register), body: _data);
 
@@ -83,6 +87,15 @@ class _RegisterState extends State<Register> {
       print(output['message']);
       print(output);
     }
+    _nama.clear();
+    _nik.clear();
+    _email.clear();
+    _password.clear();
+    _alamat.clear();
+    _nohp.clear();
+    setState(() {
+      _gender = '';
+    });
   }
 
   @override
@@ -114,11 +127,10 @@ class _RegisterState extends State<Register> {
                         child: Column(
                           children: [
                             TextFormField(
-                                onChanged: (value) {
-                                  onChange('nama', value);
-                                },
+                                onChanged: (value) {},
+                                controller: _nama,
                                 style: const TextStyle(
-                                    color: Color.fromARGB(255, 96, 110, 255),
+                                    color: Color(0xFF2769B7),
                                     fontWeight: FontWeight.w600),
                                 validator: (value) => generalValidator(value),
                                 decoration:
@@ -130,13 +142,13 @@ class _RegisterState extends State<Register> {
                               height: 10,
                             ),
                             TextFormField(
-                                onChanged: (value) {
-                                  onChange('nik', value);
-                                },
+                                onChanged: (value) {},
+                                controller: _nik,
                                 validator: (value) => generalValidator(value),
                                 maxLength: 16,
+                                keyboardType: TextInputType.number,
                                 style: const TextStyle(
-                                    color: Color.fromARGB(255, 96, 110, 255),
+                                    color: Color(0xFF2769B7),
                                     fontWeight: FontWeight.w600),
                                 decoration:
                                     CustomInputStyle.inputDecorationWithoutIcon(
@@ -147,12 +159,11 @@ class _RegisterState extends State<Register> {
                               height: 10,
                             ),
                             TextFormField(
-                                onChanged: (value) {
-                                  onChange('email', value);
-                                },
+                                onChanged: (value) {},
+                                controller: _email,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Wajib diisi!';
+                                    return 'Field tidak boleh kosong!';
                                   }
                                   if (!value.contains('@')) {
                                     return 'Gunakan email yg valid!';
@@ -163,7 +174,7 @@ class _RegisterState extends State<Register> {
                                   return null;
                                 },
                                 style: const TextStyle(
-                                    color: Color.fromARGB(255, 96, 110, 255),
+                                    color: Color(0xFF2769B7),
                                     fontWeight: FontWeight.w600),
                                 decoration:
                                     CustomInputStyle.inputDecorationWithoutIcon(
@@ -174,12 +185,11 @@ class _RegisterState extends State<Register> {
                               height: 10,
                             ),
                             TextFormField(
-                              onChanged: (value) {
-                                onChange('sandi', value);
-                              },
+                              onChanged: (value) {},
+                              controller: _password,
                               validator: (value) => generalValidator(value),
                               style: const TextStyle(
-                                  color: Color.fromARGB(255, 96, 110, 255),
+                                  color: Color(0xFF2769B7),
                                   fontWeight: FontWeight.w600),
                               decoration:
                                   CustomInputStyle.inputDecorationWithoutIcon(
@@ -192,12 +202,11 @@ class _RegisterState extends State<Register> {
                               height: 10,
                             ),
                             TextFormField(
-                                onChanged: (value) {
-                                  onChange('alamat', value);
-                                },
+                                onChanged: (value) {},
+                                controller: _alamat,
                                 validator: (value) => generalValidator(value),
                                 style: const TextStyle(
-                                    color: Color.fromARGB(255, 96, 110, 255),
+                                    color: Color(0xFF2769B7),
                                     fontWeight: FontWeight.w600),
                                 decoration:
                                     CustomInputStyle.inputDecorationWithoutIcon(
@@ -208,12 +217,13 @@ class _RegisterState extends State<Register> {
                               height: 10,
                             ),
                             TextFormField(
-                                onChanged: (value) {
-                                  onChange('no_hp', value);
-                                },
+                                onChanged: (value) {},
+                                controller: _nohp,
                                 validator: (value) => generalValidator(value),
+                                maxLength: 12,
+                                keyboardType: TextInputType.number,
                                 style: const TextStyle(
-                                    color: Color.fromARGB(255, 96, 110, 255),
+                                    color: Color(0xFF2769B7),
                                     fontWeight: FontWeight.w600),
                                 decoration:
                                     CustomInputStyle.inputDecorationWithoutIcon(
@@ -228,9 +238,9 @@ class _RegisterState extends State<Register> {
                               width: MediaQuery.of(context).size.width - 100,
                               child: DropdownButtonFormField(
                                 onChanged: (newValue) {
-                                  onChange('gender', newValue);
+                                  setState(() => _gender = newValue.toString());
                                 },
-                                value: _data['gender'],
+                                value: _gender,
                                 validator: (value) => generalValidator(value),
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -264,38 +274,6 @@ class _RegisterState extends State<Register> {
                             const SizedBox(
                               height: 20,
                             ),
-                            SizedBox(
-                              height: 60,
-                              width: MediaQuery.of(context).size.width - 100,
-                              child: DropdownButtonFormField(
-                                onChanged: (newValue) {
-                                  onChange('level', newValue);
-                                },
-                                value: _data['level'],
-                                validator: (value) => generalValidator(value),
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Theme.of(context)
-                                                .primaryColor))),
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(context).primaryColor),
-                                hint: Text(
-                                  "Jenis kelamin",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context).primaryColor),
-                                ),
-                                items: _levelList.map((e) {
-                                  return DropdownMenuItem(
-                                      value: e['value'],
-                                      child: Text(e['label']!));
-                                }).toList(),
-                              ),
-                            ),
                             const SizedBox(
                               height: 20,
                             ),
@@ -308,7 +286,7 @@ class _RegisterState extends State<Register> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15)),
                                   alignment: Alignment.center,
-                                  backgroundColor: const Color(0xFF8E97FD),
+                                  backgroundColor: Color(0xFF2769B7),
                                 ),
                                 child: Text(
                                   "Register",

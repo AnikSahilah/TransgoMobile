@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:transgo/API/api.dart';
 import 'package:transgo/UI/splashscreen.dart';
 import 'package:transgo/provider/auth.dart';
 import 'package:transgo/shared/main_comp.dart';
@@ -20,8 +23,12 @@ class _HomeState extends State<Home> {
     {"icon": Icons.history, "label": "Riwayat", "path": "/profile"}
   ];
 
+ 
+
   @override
   void initState() {
+     
+
     super.initState();
   }
 
@@ -73,7 +80,7 @@ class _HomeState extends State<Home> {
                               ),
                               Consumer<AuthApplication>(
                                 builder: (context, value, child) => Text(
-                                  value.user["nama"],
+                                  value.user["nama"]!,
                                   style: GoogleFonts.workSans(
                                       color: Colors.white,
                                       fontSize: 22,
@@ -147,7 +154,9 @@ class _HomeState extends State<Home> {
                                   RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.circular(15)))),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/pemesanan");
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,

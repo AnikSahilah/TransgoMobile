@@ -7,7 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:transgo/API/api.dart';
 import 'package:transgo/UI/home.dart';
+import 'package:transgo/UI/home2.dart';
 import 'package:transgo/provider/auth.dart';
 import 'package:transgo/style/style.dart';
 
@@ -33,17 +35,22 @@ error(String val) => Container(
 class _LoginState extends State<Login> {
   final _email = TextEditingController();
   final _password = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Future onSubmit(context) async {
-    final response = await http.post(
-        Uri.parse("http://10.0.2.2/v3/auth/login.php"),
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    final response = await http.post(Uri.parse(BaseAPI().login),
         body: {"email": _email.text, "sandi": _password.text});
+    
 
     final output = jsonDecode(response.body);
+    print(output);
     SharedPreferences pref = await SharedPreferences.getInstance();
-print(int.parse(output["data"]["id"]).runtimeType);
     if (response.statusCode == 200) {
-      pref.setInt("id", int.parse(output["data"]["id"]));
+      pref.setInt("id", output["data"]["id"]);
       var authState = Provider.of<AuthApplication>(context, listen: false);
 
       authState.setUser(output["data"]);
@@ -51,7 +58,9 @@ print(int.parse(output["data"]["id"]).runtimeType);
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute<void>(
-              builder: (BuildContext context) => const Home()),
+              builder: (BuildContext context) => output["data"]["level"] == "4"
+                  ? const Home()
+                  : const Home2()),
           ModalRoute.withName("/"));
     } else {
       var snakbar = SnackBar(
@@ -101,28 +110,56 @@ print(int.parse(output["data"]["id"]).runtimeType);
                 const SizedBox(
                   height: 40,
                 ),
-                Padding(
-                    padding: const EdgeInsets.only(left: 50, right: 50),
-                    child: TextFormField(
-                        controller: _email,
-                        style: const TextStyle(
-                            color: Color.fromARGB(255, 96, 110, 255),
-                            fontWeight: FontWeight.w600),
-                        decoration: CustomInputStyle.inputDecoration(
-                            "Email", "Inputkan email anda..", Icons.email))),
-                const SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                    padding: const EdgeInsets.only(left: 50, right: 50),
-                    child: TextFormField(
-                      controller: _password,
-                      style: const TextStyle(
-                          color: Color.fromARGB(255, 96, 110, 255),
-                          fontWeight: FontWeight.w600),
-                      decoration: CustomInputStyle.inputDecoration(
-                          "Password", "Inputkan password anda..", Icons.lock),
-                      obscureText: true,
+                Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        Padding(
+                            padding: const EdgeInsets.only(left: 50, right: 50),
+                            child: TextFormField(
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Field tidak boleh kosong!';
+                                  }
+                                  if (!value.contains('@')) {
+                                    return 'Gunakan email yg valid!';
+                                  }
+                                  if (value.split("@")[1] != "gmail.com") {
+                                    return 'Harus menggunakan email dari Gmail!';
+                                  }
+                                  return null;
+                                },
+                                controller: _email,
+                                style: const TextStyle(
+                                    color: Color.fromARGB(255, 96, 110, 255),
+                                    fontWeight: FontWeight.w600),
+                                decoration: CustomInputStyle.inputDecoration(
+                                    "Email",
+                                    "Inputkan email anda..",
+                                    Icons.email))),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.only(left: 50, right: 50),
+                            child: TextFormField(
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Field tidak boleh kosong!';
+                                }
+                                return null;
+                              },
+                              controller: _password,
+                              style: const TextStyle(
+                                  color: Color.fromARGB(255, 96, 110, 255),
+                                  fontWeight: FontWeight.w600),
+                              decoration: CustomInputStyle.inputDecoration(
+                                  "Password",
+                                  "Inputkan password anda..",
+                                  Icons.lock),
+                              obscureText: true,
+                            )),
+                      ],
                     )),
                 const SizedBox(
                   height: 20,

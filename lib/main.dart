@@ -11,12 +11,13 @@ import 'package:transgo/UI/Pemesanan.dart';
 
 import 'package:transgo/UI/home.dart';
 import 'package:transgo/UI/detail_pemesanan.dart';
-import 'package:transgo/UI/Resetpassword.dart';
+import 'package:transgo/UI/reset_password.dart';
 import 'package:transgo/UI/home2.dart';
 import 'package:transgo/UI/splashscreen.dart';
 import 'package:transgo/UI/register.dart';
 import 'package:transgo/UI/login.dart';
 import 'package:transgo/UI/profil.dart';
+import 'package:transgo/UI/tampil_bus.dart';
 import 'package:transgo/provider/auth.dart';
 import 'package:http/http.dart' as http;
 
@@ -100,7 +101,13 @@ class _MyAppState extends State<MyApp> {
         home: Builder(
           builder: (context) {
             if (_isLogin) {
-              return const Home();
+             
+              if (_user["level"] == "4") {
+                return const Home();
+              } else {
+
+              return const Home2();
+              }
             }
             return const LandingScreen();
           },
@@ -109,10 +116,9 @@ class _MyAppState extends State<MyApp> {
           '/login': (context) => const Login(),
           '/register': (context) => const Register(),
           '/lupapassword': (context) => const Lupapasword(),
-          '/detail_pemesanan': (context) => const detail_pemesanan(),
           '/home2': (context) => const Home2(),
-          '/profile': (context) => Profil(),
-          '/pemesanan': (context) => pemesanan()
+          '/profile': (context) => const Profil(),
+          '/pemesanan': (context) => const Pemesanan(),
         });
 
     return materialApp;

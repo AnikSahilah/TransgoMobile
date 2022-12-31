@@ -63,7 +63,7 @@ class _LandingScreenState extends State<LandingScreen> {
                 height: 50,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, "/home2");
+                    Navigator.pushNamed(context, "/register");
                   },
                   style: TextButton.styleFrom(
                     shape: RoundedRectangleBorder(
